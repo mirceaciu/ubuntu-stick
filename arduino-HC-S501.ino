@@ -1,17 +1,19 @@
-// HC-SR501 Motion Detector
-
-int ledPin = 13;  // LED on Pin 13 of Arduino
-int pirPin = 7; // Input for HC-S501
-
-int pirValue; // Place to store read PIR Value
-
+// Arduino pin numbers
+const int SW_pin = 2; // digital pin connected to switch output
+const int X_pin = 0; // analog pin connected to X output
+const int Y_pin = 1; // analog pin connected to Y output
 
 void setup() {
-  pinMode(ledPin, OUTPUT);
-  pinMode(pirPin, INPUT);
-  digitalWrite(ledPin, LOW);
+  pinMode(SW_pin, INPUT);
+  digitalWrite(SW_pin, HIGH);
+  Serial.begin(115200);
 }
 
 void loop() {
-  pirValue = digitalRead(pirPin);
-  digitalWrite(ledPin, pirValue);
+  Serial.print(digitalRead(SW_pin));
+  Serial.print("|");
+  Serial.print(analogRead(X_pin));
+  Serial.print("|");
+  Serial.println(analogRead(Y_pin));
+  delay(10);
+}
