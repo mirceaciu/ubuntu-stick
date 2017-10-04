@@ -4,7 +4,7 @@ Navigate trough Ubuntu virtual desktops using a joystick.
 Code is tested on Ubuntu 16 and Chrome browser.
 
 
-##Depedencies:
+## Depedencies:
 
  - [pyautogui](http://pyautogui.readthedocs.io/en/latest/install.html) - send keyboard commans to OS
  - [serial](http://pyserial.readthedocs.io/en/latest/pyserial.html) read output of Arduino
@@ -25,11 +25,12 @@ The arduino file assumes the use of an Arduino Uno board with a HC-S501 joystick
 
 ## Usage
 
-1. Flashing the `arduino-HC-S501` to Arduino:
+1. Flash `arduino-HC-S501` to Arduino:
 
 2. The program is executed by calling the python script: `python python-os-nav.py <usbPortNumber>`, where:
 
 `<usbPortNumber>` must be replace with the USB port where the arduino board is connected.
 
 !! If you need to change the connection parameters, edit line 9 in `python-os-nav.py`:
+
 `ser = serial.Serial('/dev/ttyUSB'+sys.argv[1], 115200)`, and set `/dev/ttyUSB'+sys.argv[1]` to your needs. (ex: '/dev/ttyS0')
