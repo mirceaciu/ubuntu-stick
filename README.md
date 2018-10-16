@@ -34,3 +34,13 @@ The arduino file assumes the use of an Arduino Uno board with a HC-S501 joystick
 !! If you need to change the connection parameters, edit line 9 in `python-os-nav.py`:
 
 `ser = serial.Serial('/dev/ttyUSB'+sys.argv[1], 115200)`, and set `/dev/ttyUSB'+sys.argv[1]` to your needs. (ex: '/dev/ttyS0')
+
+## Todo list
+ - change print command with logger
+ - update to python3
+ - make code PEP8 compliant 
+ - update tutorial
+ - update dependencies
+ - build GUI or executable file
+ - deal with sudo requirements
+ 
