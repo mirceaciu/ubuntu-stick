@@ -1,15 +1,26 @@
 import serial, pyautogui, time, os
 import subprocess
 import sys
+import argparse
 
 # time.sleep(2)
-joy_port = sys.argv[1]
-debug = False
+parser = argparse.ArgumentParser()
 
-ser = serial.Serial('/dev/ttyUSB'+sys.argv[1], 115200)
+parser.add_argument('--arduino', '-a', help="specify location of arduino device", type=str, default='/dev/ttyUSB0')
+parser.add_argument('--debug', '-d', help="enable or disable logging", type=bool, default=False)
+parser.add_argument('--browserlock', '-b', help="scroll in browser when selected", type=bool, default=False)
+
+args=parser.parse_args()
+
+joy_port = args.arduino
+debug = args.debug
+scroll_browser = args.browserlock
+
+ser = serial.Serial(joy_port, 115200)
+
 
 def read_serial():
-    val = ser.readline()
+    val = ser.readline().decode("utf-8")
     val_s = val.split("|")
     return {"button": int(val_s[0]), "x": int(val_s[1]), "y": int(val_s[2])}
 
@@ -20,10 +31,10 @@ def active_window():
         shell=True, stdout=subprocess.PIPE).stdout
     try:
         output = pipe.read()
-    except:
-        print 'meh'
+    except Exception as e:
+        print(str(e))
 
-    return output
+    return output.decode('utf-8')
 
 def debounce(read_param, db_type, tresh):
     change_confidence = 0
@@ -56,7 +67,6 @@ while True:
     def_y = 506
     def_x = 498
     def_b = 1
-    # print read_serial()
 
     if read_serial()["button"] == 0 and 'Google Chrome' in active_window():
         if debounce("button", "==", 0):
@@ -64,70 +74,70 @@ while True:
 
     if read_serial()["x"] < 400 and read_serial()["button"] == 1:
         if debounce("x", '<', 400) and debounce("button", '==', 1):
-            if debug: print 'x to left, confident'
-            if 'Google Chrome' in active_window():
+            if debug: print('x to left, confident')
+            if scroll_browser and 'Google Chrome' in active_window():
                 pyautogui.hotkey('ctrl', 'shift', 'tab')
                 time.sleep(0.2)
             else:
                 pyautogui.hotkey('ctrl', 'alt', 'left')
         else:
-            if debug: print 'x to left, FALSE'
+            if debug:print ('x to left, FALSE')
 
     if read_serial()["x"] > 500 and read_serial()["button"] == 1:
         if debounce("x", '>', 500) and debounce("button", '==', 1):
-            if debug: print 'x to right, confident'
-            if 'Google Chrome' in active_window():
+            if debug: print('x to right, confident')
+            if scroll_browser and 'Google Chrome' in active_window():
                 pyautogui.hotkey('ctrl', 'tab')
                 time.sleep(0.2)
             else:
                 pyautogui.hotkey('ctrl', 'alt', 'right')
         else:
-            if debug: print 'x to right, FALSE'
+            if debug: print('x to right, FALSE')
 
     if read_serial()["y"] < 400 and read_serial()["button"] == 1:
         if debounce("y", '<', 400) and debounce("button", '==', 1):
-            if debug: print 'y to top, confident'
-            if 'Google Chrome' in active_window():
+            if debug: print('y to top, confident')
+            if scroll_browser and 'Google Chrome' in active_window():
                 pyautogui.scroll(3)
             else:
                 pyautogui.hotkey('ctrl', 'alt', 'up')
         else:
-            if debug: print 'y to top, FALSE'
+            if debug: print('y to top, FALSE')
 
     if read_serial()["y"] > 600 and read_serial()["button"] == 1:
         if debounce("y", '>', 600) and debounce("button", '==', 1):
-            if debug: print 'y to bottom, confident'
-            if 'Google Chrome' in active_window():
+            if debug: print('y to bottom, confident')
+            if scroll_browser and 'Google Chrome' in active_window():
                 pyautogui.scroll(-3)
             else:
                 pyautogui.hotkey('ctrl', 'alt', 'down')
         else:
-            if debug: print 'y to bottom, FALSE'
+            if debug: print('y to bottom, FALSE')
 
     if read_serial()["y"] > 600 and read_serial()["button"] == 0:
         if debounce("y", '>', 600) and debounce("button", '==', 0):
-            if debug: print 'y bottom and button, confident'
+            if debug: print('y bottom and button, confident')
             pyautogui.hotkey('ctrl', 'alt', 'shift', 'down')
         else:
-            if debug: print 'y bottom and button, false'
+            if debug: print('y bottom and button, false')
 
     if read_serial()["y"] < 400 and read_serial()["button"] == 0:
         if debounce("y", '<', 400) and debounce("button", '==', 0):
-            if debug: print 'y top and button, confident'
+            if debug: print('y top and button, confident')
             pyautogui.hotkey('ctrl', 'alt', 'shift', 'up')
         else:
-            if debug: print 'y top and button, false'
+            if debug: print('y top and button, false')
 
     if read_serial()["x"] < 400 and read_serial()["button"] == 0:
         if debounce("x", '<', 400) and debounce("button", '==', 0):
-            if debug: print 'x left and button, confident'
+            if debug: print('x left and button, confident')
             pyautogui.hotkey('ctrl', 'alt', 'shift', 'left')
         else:
-            if debug: print 'x left and button, false'
+            if debug: print('x left and button, false')
 
     if read_serial()["x"] > 500 and read_serial()["button"] == 0:
         if debounce("x", '>', 500) and debounce("button", '==', 0):
-            if debug: print 'x right and button, confident'
+            if debug: print('x right and button, confident')
             pyautogui.hotkey('ctrl', 'alt', 'shift', 'right')
         else:
-            if debug: print 'x right and button, false'
+            if debug: print('x right and button, false')

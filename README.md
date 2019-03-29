@@ -1,8 +1,10 @@
 # ubuntu-stick v0.1
 
 Navigate trough Ubuntu virtual desktops using a joystick.
+
 Code is tested on Ubuntu 16 and Chrome browser.
 
+Requires python3.
 
 ## Depedencies:
 
@@ -25,21 +27,31 @@ The arduino file assumes the use of an Arduino Uno board with a HC-S501 joystick
 
 ## Usage
 
-1. Flash `arduino-HC-S501` to Arduino:
+1. Flash `arduino-HC-S501` to Arduino
 
-2. The program is executed by calling the python script: `python python-os-nav.py <usbPortNumber>`, where:
+2. Run python script: `python3 python-os-nav.py [options]`
 
-`<usbPortNumber>` must be replace with the USB port where the arduino board is connected.
+Possible options:
 
-!! If you need to change the connection parameters, edit line 9 in `python-os-nav.py`:
+`--arduino <path/to/device>`
 
-`ser = serial.Serial('/dev/ttyUSB'+sys.argv[1], 115200)`, and set `/dev/ttyUSB'+sys.argv[1]` to your needs. (ex: '/dev/ttyS0')
+ - Specify location of arduino board.
+ - Default: '/dev/ttyUSB0'
+ - Short-hand: `-a`
+
+`--debug <True/False>`
+
+- Prints to console position when joystick is moved.
+- Default: False
+- Short-hand: `-d`
+
+`--browserlock <True/False>`
+
+- When browser is selected up/down scrolls in page, left/right toggles tabs
+- Default: False
+- Short-hand: `-b`
 
 ## Todo list
- - change print command with logger
- - update to python3
- - make code PEP8 compliant 
- - update tutorial
  - update dependencies
  - build GUI or executable file
  - deal with sudo requirements
