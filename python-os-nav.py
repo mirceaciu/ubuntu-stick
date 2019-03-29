@@ -8,13 +8,13 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('--arduino', '-a', help="specify location of arduino device", type=str, default='/dev/ttyUSB0')
 parser.add_argument('--debug', '-d', help="enable or disable logging", type=bool, default=False)
-parser.add_argument('--browserlock', '-b', help="scroll in browser when selected", type=bool, default=False)
+parser.add_argument('--sticky', '-s', help="scroll in browser when selected", type=bool, default=False)
 
 args=parser.parse_args()
 
 joy_port = args.arduino
 debug = args.debug
-scroll_browser = args.browserlock
+scroll_browser = args.sticky
 
 ser = serial.Serial(joy_port, 115200)
 

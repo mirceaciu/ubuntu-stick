@@ -32,7 +32,7 @@ The arduino file assumes the use of an Arduino Uno board with a HC-S501 joystick
 
 1. Flash `arduino-HC-S501` to Arduino
 
-2. Run python script: `python3 python-os-nav.py [options]`
+2. Run python script: `python3 python-os-nav.py [options]` (might require `sudo`)
 
 Possible options:
 
@@ -48,11 +48,11 @@ Possible options:
 - Default: False
 - Short-hand: `-d`
 
-`--browserlock <True/False>`
+`--sticky <True/False>`
 
 - When browser is selected up/down scrolls in page, left/right toggles tabs
 - Default: False
-- Short-hand: `-b`
+- Short-hand: `-s`
 
 
 ## Tips:
