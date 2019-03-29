@@ -54,6 +54,12 @@ Possible options:
 - Default: False
 - Short-hand: `-b`
 
+
+## Tips:
+
+ - to move out from scrolling inside the browser click the joystick
+ - you can move the selected window to a new workspace by clicking and holding on the joystick while navigating to the workspace (move up/down/left/right)
+
 ## Todo list
  - update dependencies
  - build GUI or executable file
