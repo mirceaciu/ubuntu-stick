@@ -6,6 +6,7 @@ Code is tested on Ubuntu 16 and Chrome browser.
 
 Requires python3.
 
+
 ## Depedencies:
 
  - [pyautogui](http://pyautogui.readthedocs.io/en/latest/install.html) - send keyboard commans to OS
@@ -24,6 +25,8 @@ The arduino file assumes the use of an Arduino Uno board with a HC-S501 joystick
 |A0|VRx|
 |A1|VRy|
 |Digital2|SW|
+
+*Any arduino can be used as python will send the keyboard commands.
 
 ## Usage
 
