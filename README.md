@@ -30,7 +30,7 @@ The arduino file assumes the use of an Arduino Uno board with a HW-504 joystick 
 
 ## Usage
 
-1. Flash `arduino-HC-S501` to Arduino
+1. Flash `arduino-HW-504` to Arduino
 
 2. Run python script: `python3 python-os-nav.py [options]` (might require `sudo`)
 
