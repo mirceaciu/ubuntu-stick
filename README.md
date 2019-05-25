@@ -16,7 +16,7 @@ Also we will need a program to [control](http://manpages.ubuntu.com/manpages/xen
 
 ## Hardware
 
-The arduino file assumes the use of an Arduino Uno board with a HC-S501 joystick control, connected as:
+The arduino file assumes the use of an Arduino Uno board with a HW-504 joystick control, connected as:
 
 |Arduino   |HC-S501  |
 |---|---|
